@@ -1,0 +1,44 @@
+<div class="text-muted">
+     Please select the products you want and add them to your shopping cart.<br />
+   <span style="color: #dd4814; text-decoration: none;">When you are done, click the shopping cart icon to review your order and check out.</span>
+</div>
+
+<span id="" style="float:right">
+    <p>
+         <span style="text-align: left">Search : </span><input ng-model="search" class="form-control">
+    </p>
+</span>
+
+<table class="table table-bordered">
+    <tr class="well">
+        <td class="tdRight" colspan="4" >
+            <a href="index.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1" style="float:right">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+    <tr ng-repeat="product in store.products | orderBy:'name' | filter:search" >
+        <td class="tdCenter"><img ng-src="img/products/{{product.sku}}.jpg" alt="{{product.name}}" /></td>
+        <td>
+            <a href="#/products/{{product.sku}}"><b>{{product.name}}</b></a><br />
+            {{product.description}}
+        </td>
+        <td class="tdRight">
+            {{product.price | currency}}
+        </td>
+        <td class="tdCenter">
+            <a href="" ng-click="cart.addItem(product.sku, product.name, product.price, 1)">
+                add to cart
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="tdRight" colspan="4">
+            <a href="index.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>
